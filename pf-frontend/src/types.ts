@@ -4,4 +4,6 @@ export interface TodoItem {
   isDone: boolean;
   createdAt: string;
   updatedAt: string;
+  tag:string;
+  dueDate: string;
 }
