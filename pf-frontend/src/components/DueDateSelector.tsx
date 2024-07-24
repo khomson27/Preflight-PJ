@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './DueDateSelector.css'
 
 interface DueDateSelectorProps {
     dueDate: Date | null;
@@ -14,8 +15,9 @@ const DueDateSelector: React.FC<DueDateSelectorProps> = ({ dueDate, setDueDate }
             <DatePicker
                 selected={dueDate}
                 onChange={(date: Date | null) => setDueDate(date)}
-                dateFormat="yyyy/MM/dd"
+                dateFormat="dd/MM/yyyy"
                 placeholderText="Select a due date"
+                className="custom-datepicker"
             />
         </div>
     );
