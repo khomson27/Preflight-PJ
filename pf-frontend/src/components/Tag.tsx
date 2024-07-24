@@ -24,7 +24,7 @@ const Tag: React.FC<DropdownProps> = ({ options, selectedValue, onChange }) => {
     return (
         <select className='custom-dropdown' value={selectedValue} onChange={handleChange}>
             <option value="" disabled>
-                Select Tags
+                Select Tag
             </option>
             {options.map((option) => (
                 <option key={option.value} value={option.value}>
