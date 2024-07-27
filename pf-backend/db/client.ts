@@ -1,8 +1,8 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import * as schema from "@db/schema";
+import * as todolist from "@db/todolist";
 import postgres from "postgres";
 import { connectionString } from "@db/utils";
 
 export const dbConn = postgres(connectionString);
 
-export const dbClient = drizzle(dbConn, { schema: schema, logger: true });
+export const dbClient = drizzle(dbConn, { schema: todolist, logger: true });
