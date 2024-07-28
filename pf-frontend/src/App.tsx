@@ -127,8 +127,8 @@ function App() {
                 {/* <div>📅{date}</div>
                 <div>⏰{time}</div> */}
                 <div data-cy='todo-item-text'>📰{text}</div>
-                <div>🏷️{item.tag}</div>
-                <div>📅{formattedDueDate}</div>
+                <div data-cy='todo-item-tag'>🏷️{item.tag}</div>
+                <div data-cy='todo-item-due-date'>📅{formattedDueDate}</div>
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -161,6 +161,22 @@ function App() {
 
 export default App;
 
+
+function compareDate(a: TodoItem, b: TodoItem) {
+  const da = dayjs(a.createdAt);
+  const db = dayjs(b.createdAt);
+  return da.isBefore(db) ? -1 : 1;
+}
+
+
+function formatDueDate(dateString: string): string {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = date.getFullYear();
+  
+  return `${day}/${month}/${year}`;
+}
 // function formatDateTime(dateStr: string) {
 //   if (!dayjs(dateStr).isValid()) {
 //     return { date: "N/A", time: "N/A" };
@@ -171,24 +187,9 @@ export default App;
 //   return { date, time };
 // }
 
-function compareDate(a: TodoItem, b: TodoItem) {
-  const da = dayjs(a.createdAt);
-  const db = dayjs(b.createdAt);
-  return da.isBefore(db) ? -1 : 1;
-}
-
-function test(date: Date){
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so add 1
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-}
-
-function formatDueDate(dateString: string): string {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-  const year = date.getFullYear();
-
-  return `${day}/${month}/${year}`;
-}
+// function test(date: Date){
+  //   const day = String(date.getDate()).padStart(2, '0');
+  //   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so add 1
+  //   const year = date.getFullYear();
+  //   return `${day}/${month}/${year}`;
+// }
