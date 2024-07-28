@@ -108,17 +108,17 @@ app.delete("/todolist", async (req, res, next) => {
   }
 });
 
-// app.post("/todo/all", async (req, res, next) => {
-//   try {
-//     await dbClient.delete(todoTable);
-//     res.json({
-//       msg: `Delete all rows successfully`,
-//       data: {},
-//     });
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+app.post("/todo/all", async (req, res, next) => {
+  try {
+    await dbClient.delete(todoListTable);
+    res.json({
+      msg: `Delete all rows successfully`,
+      data: {},
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 
 // JSON Error Middleware
 const jsonErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
