@@ -1,6 +1,6 @@
 describe("template spec", () => {
   it("passes", () => {
-    cy.visit("https://example.cypress.io");
+    cy.visit("http://localhost:5173");
   });
 });
 
@@ -38,34 +38,34 @@ describe("Frontend", () => {
   //   // Verify the selected option
   //   cy.get('.custom-dropdown').should('have.value', 'work');
   // });
-  // it("creates todo", () => {
-  //   const text = new Date().getTime().toString();
-  //   cy.get("[data-cy='input-text']").type(text);
-  //   cy.get(".custom-datepicker").click();
-  //   cy.get(".react-datepicker__day--031").click();
-  //   cy.get("[data-cy='submit']").click();
-  //   cy.contains(text);
-  // });
   // it('should submit the form with selected date and dropdown option', () => {
-  //   // Fill the input text
-  //   const text = new Date().getTime().toString();
-  //   cy.get("[data-cy='input-text']").type(text);
+    //   // Fill the input text
+    //   const text = new Date().getTime().toString();
+    //   cy.get("[data-cy='input-text']").type(text);
     
-  //   // Select an option from the dropdown
-  //   cy.get('.custom-dropdown').select('Personal');
+    //   // Select an option from the dropdown
+    //   cy.get('.custom-dropdown').select('Personal');
     
-  //   // Open date picker and select a specific date
-  //   cy.get('.custom-datepicker').click();
-  //   cy.get('.react-datepicker__day--031').click();
+    //   // Open date picker and select a specific date
+    //   cy.get('.custom-datepicker').click();
+    //   cy.get('.react-datepicker__day--031').click();
     
-  //   // Submit the form
-  //   cy.get("[data-cy='submit']").click();
+    //   // Submit the form
+    //   cy.get("[data-cy='submit']").click();
     
-  //   // Verify the submission (you might need to adjust this based on your actual implementation)
-  //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', text);
-  //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', 'personal');
-  //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', '31/07/2024'); // Adjust the expected value as per your date format
-  // });
+    //   // Verify the submission (you might need to adjust this based on your actual implementation)
+    //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', text);
+    //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', 'personal');
+    //   cy.get('div[data-cy="todo-item-wrapper"]').should('contain', '31/07/2024'); // Adjust the expected value as per your date format
+    // });
+    // it("creates todo", () => {
+    //   const text = new Date().getTime().toString();
+    //   cy.get("[data-cy='input-text']").type(text);
+    //   cy.get(".custom-datepicker").click();
+    //   cy.get(".react-datepicker__day--031").click();
+    //   cy.get("[data-cy='submit']").click();
+    //   cy.contains(text);
+    // });
   it('should submit the form with selected due date and tag dropdown option', () => {
     // Fill the input text
     const text = new Date().getTime().toString();
