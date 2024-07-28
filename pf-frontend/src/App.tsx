@@ -19,7 +19,7 @@ function App() {
   ];
 
   async function fetchData() {
-    const res = await axios.get<TodoItem[]>("api/todo");
+    const res = await axios.get<TodoItem[]>("api/todolist");
     setTodos(res.data);
   }
 
@@ -33,14 +33,14 @@ function App() {
 
   function handleSubmit() {
     if (!inputText || !selectedTag || !dueDate) return; //ensure data is not empty
-    const formattedDueDate = formatDueDate(dueDate);
-    const data = {todoText: inputText, tag: selectedTag, dueDate: formattedDueDate}
+    // const formattedDueDate = formatDueDate(dueDate);
+    const data = {todoText: inputText, tag: selectedTag, dueDate: dueDate}
     console.log(data);
     
     if (mode === "ADD") {
       axios
         .request({
-          url: "/api/todo",
+          url: "/api/todolist",
           method: "put",
           data,
         })
@@ -54,7 +54,7 @@ function App() {
     } else {
       axios
         .request({
-          url: "/api/todo",
+          url: "/api/todolist",
           method: "patch",
           data: { id: curTodoId, todoText: inputText, tag: selectedTag, dueDate: dueDate },
         })
@@ -72,7 +72,7 @@ function App() {
 
   function handleDelete(id: string) {
     axios
-      .delete("/api/todo", { data: { id } })
+      .delete("/api/todolist", { data: { id } })
       .then(fetchData)
       .then(() => {
         setMode("ADD");
@@ -85,6 +85,8 @@ function App() {
     setMode("ADD");
     setInputText("");
     setCurTodoId("");
+    setSelectedTag('');
+    setDueDate(null);
   }
 
   return (
@@ -110,14 +112,15 @@ function App() {
           {todos.sort(compareDate).map((item, idx) => {
             // const { date, time } = formatDateTime(item.createdAt);
             const text = item.todoText;
-            // const isUrgent = item.tag.includes('urgent')
+            const isUrgent = item.tag.includes('urgent')
+            const formattedDueDate = formatDueDate(item.dueDate);
             return (
               <article
                 key={item.id}
                 style={{
                   display: "flex",
                   gap: "0.5rem",
-                  // backgroundColor: isUrgent ? "red" : "inherit", //change bg color based on tag
+                  backgroundColor: isUrgent ? "#FF7575" : "inherit", //change bg color based on tag
                 }}
               >
                 <div>({idx + 1})</div>
@@ -125,7 +128,7 @@ function App() {
                 <div>⏰{time}</div> */}
                 <div data-cy='todo-item-text'>📰{text}</div>
                 <div>🏷️{item.tag}</div>
-                <div>📅{item.dueDate}</div>
+                <div>📅{formattedDueDate}</div>
                 <div
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -174,9 +177,18 @@ function compareDate(a: TodoItem, b: TodoItem) {
   return da.isBefore(db) ? -1 : 1;
 }
 
-function formatDueDate(date: Date){
+function test(date: Date){
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so add 1
   const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+}
+
+function formatDueDate(dateString: string): string {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = date.getFullYear();
+
   return `${day}/${month}/${year}`;
 }

@@ -9,7 +9,7 @@ function App() {
     // const res = await axios.get<TodoItem[]>("http://localhost:3000/todo");
 
     // Using proxy server to avoid dealing with CORS.
-    const res = await axios.get<TodoItem[]>("api/todo");
+    const res = await axios.get<TodoItem[]>("api/todolist");
     setTodos(res.data);
   }
 
