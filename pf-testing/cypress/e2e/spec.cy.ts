@@ -1,19 +1,37 @@
-describe("template spec", () => {
-  it("passes", () => {
-    cy.visit("https://example.cypress.io");
-  });
-});
+before(() => {
+  const url = "http://localhost:3000";
+  cy.request({
+    method: "POST",
+    url: `${url}/todo/all`,})
+})
 
 describe("Backend", () => {
-  it("checks get response", () => {
+
+  // it("checks get response", () => {
+  //   const url = "http://localhost:3000";
+  //   cy.request({
+  //     method: "GET",
+  //     url: `${url}/todolist`,
+  //   }).then((res) => {
+  //     expect(res.body).to.be.a("array");
+  //   });
+  // });
+  it("create todo", () => {
     const url = "http://localhost:3000";
     cy.request({
-      method: "GET",
+      method: "PUT",
       url: `${url}/todolist`,
+      body: {
+        todoText: "test backend",
+        tag: "personal",
+        dueDate: "2024-07-31T19:37:30.000Z"
+      }
     }).then((res) => {
-      expect(res.body).to.be.a("array");
+      cy.log(JSON.stringify(res.body))
+      expect(res.body).to.have.all.keys("msg", "data");
+      expect(res.body.data).to.all.keys("id", "todoText", "tag", "dueDate");
     });
-  });
+  })
 });
 
 describe("Frontend", () => {
