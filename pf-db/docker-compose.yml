@@ -1,19 +1,21 @@
-name: preflight
+name: todo-14
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: pf-db
+    container_name: g14-todo-db
     ports:
       - 5432:${POSTGRES_PORT}
     volumes:
-      - pf-data:/var/lib/postgresql/data
+      - g14-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
     networks:
-      - pf-net
+      - g14-net
 volumes:
-  pf-data:
+  g14-data:
+    name: g14-data
 networks:
-  pf-net:
+  g14-net:
+    name: g14-net
